@@ -1,0 +1,37 @@
+<configuration debug="true">
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+        <encoder>
+            <pattern>%date{dd-MMM-yyyy HH:mm:ss.SSS} [%X{_X_MOA_MSISDN_}] [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="CallSettingsMicroService" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/home/sudeep/demo.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>/home/sudeep/demo.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- keep 30 days' worth of history -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <append>true</append>
+        <!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+        <encoder>
+            <pattern>%date{dd-MMM-yyyy HH:mm:ss.SSS} [%X{_X_MOA_MSISDN_}] [%thread] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.hibernate" additivity="false" level="DEBUG" />
+
+    <logger name="org.springframework" level="INFO" />
+    <logger name="com.google.code" level="INFO" />
+    <logger name="net.rubyeye" level="INFO" />
+
+    <!-- for Apache http client -->
+    <logger name="org.apache.http.wire" level="DEBUG"/>
+
+    <root level="debug">
+        <!--         <appender-ref ref="STDOUT" /> -->
+        <appender-ref ref="CallSettingsMicroService"/>
+    </root>
+</configuration>
